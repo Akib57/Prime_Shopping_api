@@ -21,8 +21,8 @@ class paymentController {
 
                 const accountLink = await stripe.accountLinks.create({
                     account: account.id,
-                    refresh_url: 'http://localhost:3001/refresh',
-                    return_url: `http://localhost:3001/success?activeCode=${uid}`,
+                    refresh_url: process.env.mode === 'dev' ? 'http://localhost:3001/refresh' : `${process.env.client_customer_production_url}/refresh`,
+                    return_url: process.env.mode === 'dev' ? `http://localhost:3001/success?activeCode=${uid}` :`${process.env.client_customer_production_url}/success?activeCode=${uid}`,
                     type: 'account_onboarding'
                 })
                 await striptModel.create({
@@ -36,8 +36,8 @@ class paymentController {
 
                 const accountLink = await stripe.accountLinks.create({
                     account: account.id,
-                    refresh_url: 'http://localhost:3001/refresh',
-                    return_url: `http://localhost:3001/success?activeCode=${uid}`,
+                    refresh_url: process.env.mode === 'dev' ? 'http://localhost:3001/refresh' : `${process.env.client_customer_production_url}/refresh`,
+                    return_url: process.env.mode === 'dev' ? `http://localhost:3001/success?activeCode=${uid}` :`${process.env.client_customer_production_url}/success?activeCode=${uid}`,
                     type: 'account_onboarding'
                 })
                 await striptModel.create({
